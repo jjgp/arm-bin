@@ -5,7 +5,7 @@ ARG UBUNTU_VERSION=latest
 FROM arm64v8/ubuntu:${UBUNTU_VERSION}
 
 ARG BAZELISK_VERSION=v1.10.1 \
-    BAZEL_JOBS=8 \
+    BAZEL_JOBS=auto\
     TF_VERSION=v2.5.0
 
 # https://github.com/tensorflow/tensorflow/blob/a4dfb8d1a71385bd6d122e4f27f86dcebb96712d/configure.py
