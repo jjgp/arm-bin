@@ -4,18 +4,18 @@ ARG UBUNTU_VERSION=latest
 
 FROM arm64v8/ubuntu:${UBUNTU_VERSION}
 
-ARG BAZELISK_VERSION=v1.10.1 \
-    BAZEL_JOBS=auto\
-    TF_VERSION=v2.5.0
+ARG BAZELISK_VERSION=v1.10.1
 
 # https://github.com/tensorflow/tensorflow/blob/a4dfb8d1a71385bd6d122e4f27f86dcebb96712d/configure.py
-ENV CC_OPT_FLAGS=-Wno-sign-compare \
+ENV BAZEL_JOBS=auto \
+    CC_OPT_FLAGS=-Wno-sign-compare \
     LANG=C.UTF-8 \
     PYTHON_BIN_PATH=/usr/bin/python3 \
     TF_CUDA_CLANG=0 \
     TF_DOWNLOAD_CLANG=0 \
     TF_NEED_CUDA=0 \
     TF_NEED_ROCM=0 \
+    TF_PACKAGE_VERSION=v2.5.0 \
     TF_SET_ANDROID_WORKSPACE=0 \
     USE_DEFAULT_PYTHON_LIB_PATH=1
 
@@ -32,15 +32,8 @@ RUN apt update && apt install -y \
     && mv bazel /usr/local/bin \
     && git clone https://github.com/tensorflow/tensorflow.git
 
-RUN cd tensorflow \
-    && git checkout ${TF_VERSION} \
-    && ./configure \
-    && bazel build --config=opt \
-    # https://www.tensorflow.org/install/source#expandable-1 (sample configuration session)
-        --config=noaws \
-        --config=nogcp \
-        --config=nohdfs \
-        --config=nonccl \
-        --jobs ${BAZEL_JOBS} \
-        --verbose_failures \
-        //tensorflow/tools/pip_package:build_pip_package 
+COPY build_from_source.sh .
+
+WORKDIR /tensorflow
+
+ENTRYPOINT ./build_from_source.sh
