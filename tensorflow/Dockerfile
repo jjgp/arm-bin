@@ -7,6 +7,7 @@ FROM arm64v8/ubuntu:${UBUNTU_VERSION}
 ARG BAZELISK_VERSION=v1.10.1
 
 # https://github.com/tensorflow/tensorflow/blob/a4dfb8d1a71385bd6d122e4f27f86dcebb96712d/configure.py
+# these can be overriden with the docker run -e arguments
 ENV BAZEL_JOBS=auto \
     CC_OPT_FLAGS=-Wno-sign-compare \
     LANG=C.UTF-8 \
