@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-set -u
+# https://www.tensorflow.org/install/source
+
+set -eu
 
 git fetch -atp && git checkout $TF_PACKAGE_VERSION
 
 ./configure
 
+# https://www.tensorflow.org/install/source#expandable-1 (sample configuration session)
 bazel build --config=opt \
-    # https://www.tensorflow.org/install/source#expandable-1 (sample configuration session)
     --config=noaws \
     --config=nogcp \
     --config=nohdfs \
@@ -18,4 +20,4 @@ bazel build --config=opt \
 
 ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /mnt
 
-chown $HOST_PERMS /mnt/tensorflow-${TENSORFLOW_VERSION#v}-*.whl
+chown $HOST_PERMS /mnt/tensorflow-${TF_PACKAGE_VERSION#v}-*.whl

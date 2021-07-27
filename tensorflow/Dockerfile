@@ -36,4 +36,4 @@ COPY build_from_source.sh .
 
 WORKDIR /tensorflow
 
-ENTRYPOINT ./build_from_source.sh
+ENTRYPOINT ../build_from_source.sh
