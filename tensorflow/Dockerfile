@@ -26,7 +26,7 @@ RUN apt update && apt install -y \
     python3-dev \
     python3-pip \
     && update-alternatives --install /usr/bin/python python /usr/bin/python3 1 \
-    && pip install -U --user pip numpy wheel \
+    && pip install -U --user pip numpy~=1.19.2 wheel \
     && pip install -U --user keras_preprocessing --no-deps \
     && curl -sLo bazel https://github.com/bazelbuild/bazelisk/releases/download/${BAZELISK_VERSION}/bazelisk-linux-arm64 \
     && chmod +x bazel \
