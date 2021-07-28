@@ -32,9 +32,3 @@ RUN apt update && apt install -y \
     && chmod +x bazel \
     && mv bazel /usr/local/bin \
     && git clone https://github.com/tensorflow/tensorflow.git
-
-COPY build_from_source.sh .
-
-WORKDIR /tensorflow
-
-ENTRYPOINT ../build_from_source.sh
