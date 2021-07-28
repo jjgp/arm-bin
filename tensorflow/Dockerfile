@@ -1,5 +1,3 @@
-# https://www.tensorflow.org/install/source
-
 ARG UBUNTU_VERSION=latest
 
 FROM arm64v8/ubuntu:${UBUNTU_VERSION}
@@ -16,7 +14,7 @@ ENV BAZEL_JOBS=auto \
     TF_DOWNLOAD_CLANG=0 \
     TF_NEED_CUDA=0 \
     TF_NEED_ROCM=0 \
-    TF_PACKAGE_VERSION=v2.5.0 \
+    TF_PACKAGE_VERSION=2.5.0 \
     TF_SET_ANDROID_WORKSPACE=0 \
     USE_DEFAULT_PYTHON_LIB_PATH=1
 

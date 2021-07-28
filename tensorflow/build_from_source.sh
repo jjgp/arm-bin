@@ -4,7 +4,7 @@
 
 set -eu
 
-git fetch -atp && git checkout $TF_PACKAGE_VERSION
+git fetch -atp && git checkout "v$TF_PACKAGE_VERSION"
 
 ./configure
 
@@ -20,4 +20,4 @@ bazel build --config=opt \
 
 ./bazel-bin/tensorflow/tools/pip_package/build_pip_package /mnt
 
-chown $HOST_PERMS /mnt/tensorflow-${TF_PACKAGE_VERSION#v}-*.whl
+chown $HOST_PERMS /mnt/tensorflow-$TF_PACKAGE_VERSION-*.whl
